@@ -309,7 +309,14 @@ class CounterLogic(GenericLogic):
                 header = header + ',Signal{0} (counts/s)'.format(i)
 
             data = {header: self._data_to_save}
-            filepath = self._save_logic.get_path_for_module(module_name='Counter')
+            # --------------------------------------------------------------
+            # filepath = self._save_logic.get_path_for_module(module_name='Counter')
+            if not self._save_logic.save_into_default_directory:
+                filepath, filename = self._save_logic.get_path_from_dialog()
+            else:
+                filepath = self._save_logic.get_path_for_module(modeule_name='Counter')
+            # ---------------------------------------------------------------------
+
 
             if save_figure:
                 fig = self.draw_figure(data=np.array(self._data_to_save))
@@ -534,7 +541,13 @@ class CounterLogic(GenericLogic):
         parameters['Oversampling (Samples)'] = self._counting_samples
         parameters['Smooth Window Length (# of events)'] = self._smooth_window_length
 
-        filepath = self._save_logic.get_path_for_module(module_name='Counter')
+        # --------------------------------------------------------------
+        # filepath = self._save_logic.get_path_for_module(module_name='Counter')
+        if not self._save_logic.save_into_default_directory:
+            filepath, filename = self._save_logic.get_path_from_dialog()
+        else:
+            filepath = self._save_logic.get_path_for_module(modeule_name='Counter')
+        # ---------------------------------------------------------------------
         self._save_logic.save_data(data, filepath=filepath, parameters=parameters,
                                    filelabel=filelabel, delimiter='\t')
 
