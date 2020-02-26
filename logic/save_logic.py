@@ -36,7 +36,7 @@ from collections import OrderedDict
 from core.configoption import ConfigOption
 from core.util import units
 from core.util.mutex import Mutex
-# from core.util.network import netobtain
+from core.util.network import netobtain
 from logic.generic_logic import GenericLogic
 from matplotlib.backends.backend_pdf import PdfPages
 from PIL import Image
